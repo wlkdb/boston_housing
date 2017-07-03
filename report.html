@@ -13221,7 +13221,7 @@ RNdIAygiIiIiIrpGGkAREREREdE1/gvEPP8MpkeQKgAAAABJRU5ErkJggg==
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>答案: </strong><br>
-max_depth为6时，在训练曲线中，评分随数据增加而缓慢减少；在测试曲线中，评分随数据增加先是增加，随后收敛于7.5左右。据此，有更多的训练数据并不能提升模型的表现。</p>
+max_depth为6时，在训练曲线中，评分随数据增加而缓慢减少,且减少的速率似乎在下降，所以看似可能会收敛于0.85到0.9间；在测试曲线中，评分随数据增加先是增加，随后收敛于0.75左右。据此，有更多的训练数据并不能提升模型的表现。</p>
 
 </div>
 </div>
@@ -13690,7 +13690,7 @@ Dyxf+mejidqNAAAAAElFTkSuQmCC
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>答案: </strong><br>
-max_depth为1时，模型偏差很大，方差较下，因为训练和测试的得分都很低，但两者相近。而max_depth为10时，模型方差很大，偏差一般，因为测试的得分,约0.7，并且和训练得分相差较大。</p>
+max_depth为1时，模型偏差很大，方差较小，因为训练和测试的得分都很低，但两者相近。而max_depth为10时，模型方差很大，偏差一般，因为测试的得分约0.7，并且和训练得分相差较大。</p>
 
 </div>
 </div>
@@ -13743,7 +13743,7 @@ max_depth为3的模型能最好的预测，因为其测试得分与最大值（m
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>回答: </strong><br>
-网格搜索是一种确定最佳参数的方法，在参数集的可能域值内，以一定的步长遍历所有可能的参数组合，最终选择其中精确度最高的。</p>
+网格搜索是一种确定最佳参数组合的方法。首先选定一个参数列表和一系列参数值，给出的值要尽可能包含潜在的最优参数值。然后使用这些参数值分别进行搜索，最终选择其中得分最高的参数组合。</p>
 
 </div>
 </div>
@@ -13771,10 +13771,10 @@ max_depth为3的模型能最好的预测，因为其测试得分与最大值（m
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>答案: </strong></p>
 <ul>
-<li>将所有样本分成相近的K份，轮流将其中一份作为测试样本，剩余K-1份作为训练样本，最后的平均测试结果可以衡量模型的性能。  </li>
+<li>将所有训练集分成相近的K份，轮流将其中一份作为验证样本，剩余K-1份作为训练样本，最后的平均测试结果可以衡量模型的性能。  </li>
 <li>通过网格搜索来遍历可能的参数组合，通过交叉验证来得到当前参数组合的拟合效果，最后选择效果最好的参数组合。  </li>
-<li>可以较准确的得知当前参数组合的拟合效果，如果不使用交叉验证也可使用固定的测试集进行验证，但数据量较小，验证准确性差些。  </li>
-<li>GridSearchCV模块中，不同超参数的组合方式及其计算结果以字典的形式保存在<code>grid.cv_results_</code>中</li>
+<li>可以较准确的得知当前参数组合的拟合效果，如果不使用交叉验证也可使用固定的验证集进行验证，但数据量较小，验证准确性差些。  </li>
+<li>GridSearchCV模块中，不同超参数的组合方式及其计算结果以字典的形式保存在<code>grid.cv_results_</code>中。</li>
 </ul>
 
 </div>
@@ -13812,7 +13812,7 @@ max_depth为3的模型能最好的预测，因为其测试得分与最大值（m
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import &#39;make_scorer&#39;, &#39;DecisionTreeRegressor&#39;, and &#39;GridSearchCV&#39;</span>
@@ -13999,7 +13999,7 @@ Predicted selling price for Client 3&#39;s home: $896,962.50
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>答案: </strong><br>
-建议的销售价格分别为<code>$413,000  $234,500  $897,000</code>。从特征判断，价格合理。因为可以看出，三者的价格首先与房间数成强相关关系，其次价格也不是简单的与房间数成正比，例如4间房的比5间房的价格低很多，这体现了4间房的另两个特征参数的影响，即贫困指数越大，学生-老师比越大，价格越低。</p>
+建议的销售价格分别为<code>$413,000  $234,500  $897,000</code>。从特征判断，价格合理。因为与此前的计算比对，三个价格都在最低价格<code>$105,000</code>到最高价格<code>$1,024,800</code>之间，且客户1的房价<code>$413,000</code>与价格中位数<code>$438,900</code>相近。而房间数更少、贫困指数更高、学生-老师比更大的客户2房价低于客户1，房间数更多、贫困指数更低、学生-老师比更小的客户3房价高于客户1，这也与此前的预测相符。</p>
 
 </div>
 </div>
@@ -14088,7 +14088,7 @@ Range in prices: $73,357.39
 <p><strong>答案: </strong></p>
 <ul>
 <li>不完全适用，除了通胀率外，还有经济发展水平等诸多因素会影响不同年份的房屋价格。当然也由于房间数等特征对于价格的影响始终存在重要影响，可以考虑在用老数据取得的预测结果的基础上再乘以一个系数，不过这样效果也不会太好。</li>
-<li>不足够，只有三个特征，连基本的房屋面积信息都没有，而且很显然房屋所在区域，距最近地铁站距离，附近人口密度等信息也都是决定性的。</li>
+<li>不足够，只有三个特征，连基本的房屋面积信息都没有，而且很显然房屋所在区域、距最近地铁站距离、附近人口密度等信息也都是决定性的。</li>
 <li>不足够健壮，由上可知，预测房价的范围在<code>$351,577.61</code>到<code>$424,935.00</code>间，虽然数量级是相同的，但仍有20%左右的波动。</li>
 <li>一般不能，除非有特征/特征集可以很好的体现出大都市和乡镇的差距，比如人口密度，收入水平等。</li>
 </ul>
